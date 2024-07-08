@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 50f;
-    public float damage = 10f;
     public float deleteAfterDistance = 100f;
 
     // Start is called before the first frame update
@@ -19,7 +18,7 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        if (transform.position.x < deleteAfterDistance || transform.position.z < deleteAfterDistance  || transform.position.y < deleteAfterDistance)
+        if (transform.position.x > deleteAfterDistance || transform.position.z > deleteAfterDistance  || transform.position.y > deleteAfterDistance)
         {
             Destroy(gameObject);
         }
@@ -31,6 +30,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.GetComponent<EnemyController>() != null)
         {
             collision.gameObject.GetComponent<EnemyController>().KillEnemy();
+            Destroy(gameObject);
         }
     }
 }

@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float moveSpeed = 5f;  // Speed at which the enemy moves
+    public float moveSpeed;
+
     private Transform playerTransform;
     private Rigidbody rb;
+
+    public GameObject gameManager;
 
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
+
+        gameManager = GameObject.FindGameObjectWithTag("GameController");
     }
 
     void Update()
     {
+        moveSpeed = gameManager.GetComponent<GameManager>().currentEnemySpeed;
         MoveTowardsPlayer();
     }
 
@@ -47,5 +53,6 @@ public class EnemyController : MonoBehaviour
     public void KillEnemy()
     {
         Destroy(gameObject);
+        gameManager.GetComponent<GameManager>().killCount += 1;
     }
 }

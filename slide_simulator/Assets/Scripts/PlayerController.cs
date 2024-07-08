@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,17 +11,47 @@ public class PlayerController : MonoBehaviour
     public Transform bulletShootPos;
     public int health = 3;
 
+    public float cooldown = 1;
+    public float lastShotTime = 0;
+
+    private Collider playerCollider;
+
     void Start()
     {
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
         rb.drag = 0;  // Ensure no drag affects the player's stopping
+        playerCollider = GetComponent<Collider>();
+
+
     }
 
     void Update()
     {
         // Rotate the player to face the cursor
         RotatePlayerToCursor();
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (Time.time > lastShotTime)
+            {
+                lastShotTime = Time.time + cooldown;
+                if (bullet != null && bulletShootPos != null)
+                {
+                    GameObject newBullet = Instantiate(bullet, bulletShootPos.position, bulletShootPos.rotation);
+                    Collider bulletCollider = newBullet.GetComponent<Collider>();
+                    if (bulletCollider != null && playerCollider != null)
+                    {
+                        Physics.IgnoreCollision(bulletCollider, playerCollider);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Bullet or bulletShootPos is not assigned.");
+                }
+            }
+
+        }
     }
 
     void FixedUpdate()
@@ -28,10 +59,7 @@ public class PlayerController : MonoBehaviour
         // Move the player
         MovePlayer();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
+
     }
 
     void MovePlayer()
@@ -58,11 +86,6 @@ public class PlayerController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             rb.MoveRotation(targetRotation);
         }
-    }
-
-    void Shoot()
-    {
-        Instantiate(bullet, bulletShootPos.position, bulletShootPos.rotation);
     }
 
     public void dealDmg()
