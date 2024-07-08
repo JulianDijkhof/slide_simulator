@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/Luuk.unity
+    guid: db4a309858a3ca64c90df1da92ae8b62
+  - enabled: 1
+    path: Assets/Scenes/Mainscene.unity
+    guid: 4bdf0eb52cf002c4782a8041b3b76600
   m_configObjects: {}
