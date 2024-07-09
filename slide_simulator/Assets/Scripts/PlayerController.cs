@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.drag = 0;  // Ensure no drag affects the player's stopping
         playerCollider = GetComponent<Collider>();
-
-
     }
 
     void Update()
@@ -95,5 +93,17 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void FireSpeedPu(float duration)
+    {
+        cooldown = 0.2f;
+        StartCoroutine(DeactivateFireSpeedPU(duration));
+    }
+
+    private IEnumerator DeactivateFireSpeedPU(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        cooldown = 1f;
     }
 }

@@ -52,7 +52,8 @@ public class EnemyController : MonoBehaviour
 
     public void KillEnemy()
     {
-        Destroy(gameObject);
         gameManager.GetComponent<GameManager>().killCount += 1;
+        gameManager.GetComponent<GameManager>().AddKillToScore();
+        Destroy(gameObject);
     }
 }

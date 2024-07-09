@@ -26,13 +26,17 @@ public class GameManager : MonoBehaviour
     private float currentSpawnRate;
 
     public int killCount;
-
+    public bool freezePowerActive = false;
+    private int currentScore = 0;
+    public bool doublePoints = false;
+    private float currentTime;
     // Start is called before the first frame update
     void Start()
     {
         currentSpawnRate = initialSpawnRate;
         StartCoroutine(SpawnEnemies());
         currentEnemySpeed = startEnemySpeed;
+        InvokeRepeating("AddTimeToScore", 0, 1);
     }
 
     // Update is called once per frame
@@ -50,10 +54,16 @@ public class GameManager : MonoBehaviour
 
             // Adjust the spawn rate based on the elapsed time
             currentSpawnRate = Mathf.Max(1f, initialSpawnRate - elapsedTime / 60); // Decrease the spawn rate over time, minimum 1 second
-
             float normalizedTime = Mathf.Clamp01(elapsedTime / (5 * 60f));
-            currentEnemySpeed = Mathf.Lerp(startEnemySpeed, targetEnemySpeed, normalizedTime);
+            float enemySpeed = Mathf.Lerp(startEnemySpeed, targetEnemySpeed, normalizedTime);
+            if (!freezePowerActive)
+            {
+                currentEnemySpeed = enemySpeed;
+            }
         }
+
+        currentTime = Time.time;
+        
     }
 
     void StartTimer()
@@ -69,6 +79,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         StopTimer();
+        CancelInvoke("AddTimeToScore");
     }
 
     IEnumerator SpawnEnemies()
@@ -77,7 +88,7 @@ public class GameManager : MonoBehaviour
         {
             // Calculate the next spawn interval with some randomness
             float spawnInterval = currentSpawnRate + UnityEngine.Random.Range(-randomFactor, randomFactor);
-            spawnInterval = Mathf.Max(0.5f, spawnInterval); // Ensure the interval is not too short
+            spawnInterval = Mathf.Max(0.1f, spawnInterval); // Ensure the interval is not too short
 
             yield return new WaitForSeconds(spawnInterval);
 
@@ -93,13 +104,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Calculates final score based on elapsed time and kills
-    public int CalculateFinalScore()
+    public void ActivateFreeze(float duration)
     {
-        int accumulatedTime = Mathf.RoundToInt(elapsedTime);
-        int accumulatedKills = killCount * 5;
-        int finalScore = accumulatedTime + accumulatedKills;
+        freezePowerActive = true;
+        currentEnemySpeed = 0;
+        StartCoroutine(DeactivateFreezePU(duration));
+    }
 
-        return finalScore;
+    public void AddKillToScore()
+    {
+        currentScore += 5;
+        if (doublePoints)
+        {
+            currentScore += 10;
+        }
+    }
+
+    public void AddTimeToScore()
+    {
+        currentScore += 1;
+        if (doublePoints)
+        {
+            currentScore += 2;
+        }
+    }
+
+    public void DoublePoints(float duration)
+    {
+        doublePoints = true;
+        StartCoroutine(DeactivateDoublePointsPU(duration));
+    }
+
+    private IEnumerator DeactivateDoublePointsPU(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        doublePoints = false;
+    }
+
+    private IEnumerator DeactivateFreezePU(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        freezePowerActive = false;
     }
 }
