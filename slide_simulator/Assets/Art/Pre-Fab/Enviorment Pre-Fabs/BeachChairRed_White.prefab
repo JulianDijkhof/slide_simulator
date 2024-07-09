@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1649843518288418106
+--- !u!1001 &3537180026095427960
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5bad3939165d31c4aa4624ae0e8b6270,
         type: 3}
       propertyPath: m_Name
-      value: BeachChair
+      value: BeachChairRed_White
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5bad3939165d31c4aa4624ae0e8b6270,
         type: 3}
@@ -80,21 +80,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5bad3939165d31c4aa4624ae0e8b6270,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8282474260865503100}
+      addedObject: {fileID: 1599903531813932244}
   m_SourcePrefab: {fileID: 100100000, guid: 5bad3939165d31c4aa4624ae0e8b6270, type: 3}
---- !u!1 &1883632887832701035 stripped
+--- !u!1 &4456311486981823529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5bad3939165d31c4aa4624ae0e8b6270,
     type: 3}
-  m_PrefabInstance: {fileID: 1649843518288418106}
+  m_PrefabInstance: {fileID: 3537180026095427960}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8282474260865503100
+--- !u!65 &1599903531813932244
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883632887832701035}
+  m_GameObject: {fileID: 4456311486981823529}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -107,5 +107,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1127293, y: 1.3348207, z: 2.513129}
-  m_Center: {x: 0, y: 0.66636145, z: -0.3033134}
+  m_Size: {x: 0.75214493, y: 0.9022668, z: 1.6987395}
+  m_Center: {x: 0, y: 0.45042434, z: -0.20502344}

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &186074818509651416
+--- !u!1001 &2361526966197002267
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4378f21cde2327f409bc7398ac31a903,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4378f21cde2327f409bc7398ac31a903,
         type: 3}
@@ -80,21 +80,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4378f21cde2327f409bc7398ac31a903,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5706834975626472379}
+      addedObject: {fileID: 4183942734212215568}
   m_SourcePrefab: {fileID: 100100000, guid: 4378f21cde2327f409bc7398ac31a903, type: 3}
---- !u!1 &1032586408640151689 stripped
+--- !u!1 &3171868474211343690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4378f21cde2327f409bc7398ac31a903,
     type: 3}
-  m_PrefabInstance: {fileID: 186074818509651416}
+  m_PrefabInstance: {fileID: 2361526966197002267}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &5706834975626472379
+--- !u!136 &4183942734212215568
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032586408640151689}
+  m_GameObject: {fileID: 3171868474211343690}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -108,6 +108,6 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1
-  m_Height: 2.9204705
+  m_Height: 1.9740803
   m_Direction: 1
-  m_Center: {x: 0, y: 1.4602352, z: -0.00987792}
+  m_Center: {x: 0, y: 0.98704016, z: -0.0066768825}
