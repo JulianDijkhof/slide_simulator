@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnNukePU", 180, 120);
         InvokeRepeating("SpawnFreezePU", 120, 60);
         InvokeRepeating("SpawnShieldPU", 180, 150);
+
+        freezeImage.enabled = false;
+        shieldImage.enabled = false;
+        doublePointsImage.enabled = false;
     }
 
     // Update is called once per frame
