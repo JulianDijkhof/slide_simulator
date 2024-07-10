@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public bool freezePowerActive = false;
     private int currentScore = 0;
     public bool doublePoints = false;
-    private float currentTime;
 
     public TMP_Text scoreText;
     public Image health1;
@@ -45,14 +44,13 @@ public class GameManager : MonoBehaviour
     public GameObject nukePU;
     public GameObject freezePU;
     public GameObject shieldPU;
+    public GameObject doublePointsPU;
 
     public Image freezeImage;
     public Image shieldImage;
     public Image doublePointsImage;
 
     public PlayerController playerController;
-
-    public GameObject gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +62,7 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnNukePU", 180, 120);
         InvokeRepeating("SpawnFreezePU", 120, 60);
         InvokeRepeating("SpawnShieldPU", 180, 150);
-
+        InvokeRepeating("SpawnDoublePointsPU", 60, 135);
         freezeImage.enabled = false;
         shieldImage.enabled = false;
         doublePointsImage.enabled = false;
@@ -270,5 +268,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         playerController.shieldActive = false;
         shieldImage.enabled = false;
+    }
+
+    private void SpawnDoublePointsPU()
+    {
+        Vector3 spawnLocation = new Vector3(
+    UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
+    1.5f,                               // Y coordinate fixed at 1.5
+    UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
+);
+
+        Instantiate(doublePointsPU, spawnLocation, Quaternion.identity);
     }
 }

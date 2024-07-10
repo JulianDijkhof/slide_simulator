@@ -4404,6 +4404,8 @@ MonoBehaviour:
   nukePU: {fileID: 2617463771812502175, guid: 651f8331e1fd08642a6f0e365f7875b1, type: 3}
   freezePU: {fileID: 907821219725186628, guid: 214ff382b1d00c943bbadab5a17f1bb2, type: 3}
   shieldPU: {fileID: 929864897672389375, guid: d0e15480ce3bf9d47897f9d02c3dea42, type: 3}
+  doublePointsPU: {fileID: 29099119754926980, guid: 5ef7a02d546d61940bb7afd1e3086cc2,
+    type: 3}
   freezeImage: {fileID: 535447716}
   shieldImage: {fileID: 1584842553}
   doublePointsImage: {fileID: 378166837}
