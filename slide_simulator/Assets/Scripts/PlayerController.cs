@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float lastShotTime = 0;
 
     private Collider playerCollider;
+    public Animator animator;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.drag = 0;  // Ensure no drag affects the player's stopping
         playerCollider = GetComponent<Collider>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -52,6 +54,15 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+        }
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
@@ -83,7 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-
         Vector3 moveDirection = new Vector3(moveX, 0, moveY).normalized;
         rb.velocity = moveDirection * moveSpeed;
     }
