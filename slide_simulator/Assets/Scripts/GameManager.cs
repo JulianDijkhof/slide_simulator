@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
     public Image dmg3;
 
     public GameObject nukePU;
+    public GameObject freezePU;
+    public GameObject shieldPU;
+
+    public Image freezeImage;
+    public Image shieldImage;
+    public Image doublePointsImage;
 
     public PlayerController playerController;
 
@@ -56,6 +62,8 @@ public class GameManager : MonoBehaviour
         currentEnemySpeed = startEnemySpeed;
         InvokeRepeating("AddTimeToScore", 0, 1);
         InvokeRepeating("SpawnNukePU", 180, 120);
+        InvokeRepeating("SpawnFreezePU", 120, 60);
+        InvokeRepeating("SpawnShieldPU", 180, 150);
     }
 
     // Update is called once per frame
@@ -169,6 +177,7 @@ public class GameManager : MonoBehaviour
     public void ActivateFreeze(float duration)
     {
         freezePowerActive = true;
+        freezeImage.enabled = true;
         currentEnemySpeed = 0;
         StartCoroutine(DeactivateFreezePU(duration));
     }
@@ -194,6 +203,7 @@ public class GameManager : MonoBehaviour
     public void DoublePoints(float duration)
     {
         doublePoints = true;
+        doublePointsImage.enabled = true;
         StartCoroutine(DeactivateDoublePointsPU(duration));
     }
 
@@ -201,12 +211,14 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         doublePoints = false;
+        doublePointsImage.enabled = false;
     }
 
     private IEnumerator DeactivateFreezePU(float duration)
     {
         yield return new WaitForSeconds(duration);
         freezePowerActive = false;
+        freezeImage.enabled = false;
     }
 
     private void SpawnNukePU()
@@ -218,5 +230,41 @@ public class GameManager : MonoBehaviour
         );
 
         Instantiate(nukePU, spawnLocation, Quaternion.identity);
+    }
+
+    private void SpawnFreezePU()
+    {
+        Vector3 spawnLocation = new Vector3(
+            UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
+            1.5f,                               // Y coordinate fixed at 1.5
+            UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
+        );
+
+        Instantiate(freezePU, spawnLocation, Quaternion.identity);
+    }
+
+    private void SpawnShieldPU()
+    {
+        Vector3 spawnLocation = new Vector3(
+            UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
+            1.5f,                               // Y coordinate fixed at 1.5
+            UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
+        );
+
+        Instantiate(shieldPU, spawnLocation, Quaternion.identity);
+    }
+
+    public void ActivateShield(float duration)
+    {
+        playerController.shieldActive = true;
+        shieldImage.enabled = true;
+        StartCoroutine(DeactivateShieldPU(duration));
+    }
+
+    private IEnumerator DeactivateShieldPU(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        playerController.shieldActive = false;
+        shieldImage.enabled = false;
     }
 }

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     public GameManager manager;
+    public bool shieldActive = false;
 
     void Start()
     {
@@ -119,12 +120,19 @@ public class PlayerController : MonoBehaviour
 
     public void dealDmg()
     {
-        health -= 1;
-        if (health <= 0)
+        if (!shieldActive)
         {
-            manager.EndGame();
-            Destroy(gameObject);
+            health -= 1;
+            if (health <= 0)
+            {
+                manager.EndGame();
+                Destroy(gameObject);
 
+            }
+        }
+        else
+        {
+            return;
         }
     }
 
