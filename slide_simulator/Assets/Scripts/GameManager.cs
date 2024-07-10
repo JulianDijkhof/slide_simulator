@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public bool freezePowerActive = false;
     private int currentScore = 0;
     public bool doublePoints = false;
+    private float currentTime;
 
     public TMP_Text scoreText;
     public Image health1;
@@ -50,7 +51,10 @@ public class GameManager : MonoBehaviour
     public Image shieldImage;
     public Image doublePointsImage;
 
+    public GameObject canvas;
+
     public PlayerController playerController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
         freezeImage.enabled = false;
         shieldImage.enabled = false;
         doublePointsImage.enabled = false;
+        Invoke("TurnOnCanvas", 0.1f);
     }
 
     // Update is called once per frame
@@ -279,5 +284,10 @@ public class GameManager : MonoBehaviour
 );
 
         Instantiate(doublePointsPU, spawnLocation, Quaternion.identity);
+    }
+
+    void TurnOnCanvas()
+    {
+        canvas.SetActive(true);
     }
 }
