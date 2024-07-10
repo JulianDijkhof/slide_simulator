@@ -1453,6 +1453,7 @@ MonoBehaviour:
   dmg1: {fileID: 912590802}
   dmg2: {fileID: 7153077}
   dmg3: {fileID: 144347943}
+  nukePU: {fileID: 2617463771812502175, guid: 651f8331e1fd08642a6f0e365f7875b1, type: 3}
   playerController: {fileID: 2082581039}
 --- !u!4 &2005574268
 Transform:

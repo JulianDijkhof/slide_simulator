@@ -42,7 +42,11 @@ public class GameManager : MonoBehaviour
     public Image dmg2;
     public Image dmg3;
 
+    public GameObject nukePU;
+
     public PlayerController playerController;
+
+    public GameObject gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         currentEnemySpeed = startEnemySpeed;
         InvokeRepeating("AddTimeToScore", 0, 1);
+        InvokeRepeating("SpawnNukePU", 180, 120);
     }
 
     // Update is called once per frame
@@ -202,5 +207,16 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         freezePowerActive = false;
+    }
+
+    private void SpawnNukePU()
+    {
+        Vector3 spawnLocation = new Vector3(
+            UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
+            1.5f,                               // Y coordinate fixed at 1.5
+            UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
+        );
+
+        Instantiate(nukePU, spawnLocation, Quaternion.identity);
     }
 }
