@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    // X limit 95-9
+    // Z limit 35-75
     public float moveSpeed = 5f;
     private Camera mainCamera;
     private Rigidbody rb;
@@ -57,7 +60,23 @@ public class PlayerController : MonoBehaviour
         // Move the player
         MovePlayer();
 
-
+        // Setting play area limits
+        if (gameObject.transform.position.x > 95)
+        {
+            gameObject.transform.position = new Vector3 (95, transform.position.y, transform.position.z);
+        }
+        if (gameObject.transform.position.x < 9)
+        {
+            gameObject.transform.position = new Vector3(9, transform.position.y, transform.position.z);
+        }
+        if (gameObject.transform.position.z < 35)
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 35);
+        }
+        if (gameObject.transform.position.z > 75)
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 75);
+        }
     }
 
     void MovePlayer()
