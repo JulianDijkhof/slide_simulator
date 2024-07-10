@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +32,18 @@ public class GameManager : MonoBehaviour
     private int currentScore = 0;
     public bool doublePoints = false;
     private float currentTime;
+
+    public TMP_Text scoreText;
+    public Image health1;
+    public Image health2;
+    public Image health3;
+
+    public Image dmg1;
+    public Image dmg2;
+    public Image dmg3;
+
+    public PlayerController playerController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +77,50 @@ public class GameManager : MonoBehaviour
         }
 
         currentTime = Time.time;
-        
+
+        scoreText.text = currentScore.ToString();
+
+        if (playerController.health == 3)
+        {
+            health1.enabled = true;
+            health2.enabled = true;
+            health3.enabled = true;
+
+            dmg1.enabled = false;
+            dmg2.enabled = false;
+            dmg3.enabled = false;
+        }
+        else if (playerController.health == 2)
+        {
+            health1.enabled = true;
+            health2.enabled = true;
+            health3.enabled = false;
+
+            dmg1.enabled = false;
+            dmg2.enabled = false;
+            dmg3.enabled = true;
+        }
+        else if (playerController.health == 1)
+        {
+            health1.enabled = true;
+            health2.enabled = false;
+            health3.enabled = false;
+
+            dmg1.enabled = false;
+            dmg2.enabled = true;
+            dmg3.enabled = true;
+        }
+        else if (playerController.health == 0)
+        {
+            health1.enabled = false;
+            health2.enabled = false;
+            health3.enabled = false;
+
+            dmg1.enabled = true;
+            dmg2.enabled = true;
+            dmg3.enabled = true;
+        }
+
     }
 
     void StartTimer()

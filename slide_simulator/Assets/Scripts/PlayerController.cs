@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private Collider playerCollider;
     public Animator animator;
 
+    public GameManager manager;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -58,11 +60,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            animator.SetBool("isRunning", true);
+            animator.SetBool("isMoving", false);
         }
         else
         {
-            animator.SetBool("isRunning", false);
+            animator.SetBool("isMoving", true);
         }
     }
 
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-        Vector3 moveDirection = new Vector3(moveX, 0, moveY).normalized;
+        Vector3 moveDirection = new Vector3(-moveX, 0, -moveY).normalized;
         rb.velocity = moveDirection * moveSpeed;
     }
 
@@ -120,7 +122,9 @@ public class PlayerController : MonoBehaviour
         health -= 1;
         if (health <= 0)
         {
+            manager.EndGame();
             Destroy(gameObject);
+
         }
     }
 
