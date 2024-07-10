@@ -18,11 +18,13 @@ public class Pauze : MonoBehaviour
         {
             if (isPaused)
             {
-                ResumeGame();
+                
+                PauseGame();
             }
             else
-            {
-                PauseGame();
+            { 
+                
+                ResumeGame();
             }
         }
     }

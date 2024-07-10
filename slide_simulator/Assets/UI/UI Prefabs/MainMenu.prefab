@@ -907,8 +907,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1122028686667569883}
         m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 5
+        m_MethodName: GoToGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

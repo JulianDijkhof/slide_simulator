@@ -7,9 +7,15 @@ using UnityEngine.UI;
 public class SceneSwitcher : MonoBehaviour
 {
     // Method to be called when the button is clicked
-    public void SwitchScene(string Mainscene)
+    public void GoToMainMenu()
     {
-        SceneManager.LoadScene(Mainscene);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Luuk");
+    }
+    public void GoToGame()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("MainScene");
     }
 
     public void Quit()
