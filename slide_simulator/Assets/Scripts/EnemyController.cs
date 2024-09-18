@@ -54,6 +54,37 @@ public class EnemyController : MonoBehaviour
     {
         gameManager.GetComponent<GameManager>().killCount += 1;
         gameManager.GetComponent<GameManager>().AddKillToScore();
+        RollForPU();
         Destroy(gameObject);
+    }
+
+    void RollForPU ()
+    {
+        float random = Random.Range(0, 100);
+        if (random >= 95)
+        {
+            SpawnRandomPU();
+        }
+    }
+
+    void SpawnRandomPU()
+    {
+        float random = Random.Range(0, 4);
+        if (random == 0)
+        {
+            gameManager.GetComponent<GameManager>().SpawnDoublePointsPU();
+        }
+        if (random == 1)
+        {
+            gameManager.GetComponent<GameManager>().SpawnFreezePU();
+        }
+        if (random == 2)
+        {
+            gameManager.GetComponent<GameManager>().SpawnNukePU();
+        }
+        if (random == 3)
+        {
+            gameManager.GetComponent<GameManager>().SpawnShieldPU();
+        }
     }
 }

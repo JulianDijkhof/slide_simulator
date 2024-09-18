@@ -1,20 +1,27 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
+    //---------------------\\
+    // Max play area limits
     // X limit 95-9
     // Z limit 35-75
+    //---------------------\\
+    public Vector2 currentPos;
     public float moveSpeed = 5f;
     private Camera mainCamera;
     private Rigidbody rb;
+    private Vector3 vert;
+    private Vector3 horz;
 
     public GameObject bullet;
     public Transform bulletShootPos;
     public int health = 3;
 
     public float cooldown = 1;
+    public bool cdActive = false;
     public float lastShotTime = 0;
 
     private Collider playerCollider;
@@ -23,13 +30,15 @@ public class PlayerController : MonoBehaviour
     public GameManager manager;
     public bool shieldActive = false;
 
+    // Basic setup
     void Start()
     {
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
-        rb.drag = 0;  // Ensure no drag affects the player's stopping
+        rb.drag = 0;
         playerCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
+        rb.freezeRotation = true;
     }
 
     void Update()
@@ -37,6 +46,17 @@ public class PlayerController : MonoBehaviour
         // Rotate the player to face the cursor
         RotatePlayerToCursor();
 
+        // Animation stuff, doens't work very well yet though.
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("isMoving", false);
+        }
+        else
+        {
+            animator.SetBool("isMoving", true);
+        }
+
+        // Shoot if the gun isn't on cooldown and space is pressed
         if (Input.GetKey(KeyCode.Space))
         {
             if (Time.time > lastShotTime)
@@ -58,22 +78,10 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-        {
-            animator.SetBool("isMoving", false);
-        }
-        else
-        {
-            animator.SetBool("isMoving", true);
-        }
     }
 
     void FixedUpdate()
     {
-        // Move the player
-        MovePlayer();
-
         // Setting play area limits
         if (gameObject.transform.position.x > 95)
         {
@@ -93,31 +101,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MovePlayer()
+    // Triggered by InputSystem
+    public void OnMovement(InputValue value)
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-        Vector3 moveDirection = new Vector3(-moveX, 0, -moveY).normalized;
-        rb.velocity = moveDirection * moveSpeed;
+        var v = value.Get<Vector2>();
+        vert.x = v.x;
+        horz.z = v.y; // <- Converting Vector2 values to Vector3 values, can't have the player start to fly now can we?
+        MovePlayer();
     }
 
+    // Keep looking at the cursor, don't you dare get distracted!
     void RotatePlayerToCursor()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
-
         if (groundPlane.Raycast(ray, out rayLength))
         {
             Vector3 pointToLook = ray.GetPoint(rayLength);
             Vector3 direction = pointToLook - transform.position;
-            direction.y = 0f; // Ensure the player stays upright
+            direction.y = 0f; // Ensure the player stays upright, lest he might fall over and die...
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             rb.MoveRotation(targetRotation);
         }
     }
 
+    // Take damage if hit without an active shield. Ouch!
     public void dealDmg()
     {
         if (!shieldActive)
@@ -136,15 +146,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Rapid fire time! BRRRRRRRR
     public void FireSpeedPu(float duration)
     {
         cooldown = 0.2f;
         StartCoroutine(DeactivateFireSpeedPU(duration));
     }
 
+    // Fun is over, back to normal shooting speed.
     private IEnumerator DeactivateFireSpeedPU(float duration)
     {
         yield return new WaitForSeconds(duration);
         cooldown = 1f;
+    }
+
+    // Move your ass
+    void MovePlayer()
+    {
+        Vector3 moveDirection = new Vector3(-vert.x, 0, -horz.z).normalized;
+        rb.velocity = new Vector3(moveDirection.x * moveSpeed, rb.velocity.y, moveDirection.z * moveSpeed);
     }
 }

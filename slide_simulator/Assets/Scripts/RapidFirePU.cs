@@ -7,18 +7,12 @@ public class RapidFirePU : MonoBehaviour
 {
 
     private PlayerController controller;
-    public float expirationTime = 5f;
+    public float expirationTime = 20f;
     public float effectDuration = 4f;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(DestroyAfterTime());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter(Collider collider)

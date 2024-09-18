@@ -115,6 +115,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bee2e5f527fb34ea1c0f2db6579e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: df0d9ae6-9197-42c2-b893-a8415f01b279
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  shootAction:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b8cf8dc0-b4e9-4466-b3ab-cb02077f6454
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  currentPos: {x: 0, y: 0}
   moveSpeed: 8
   bullet: {fileID: 1162550656153764542, guid: 9eff177926633784d9ffa6084a0e3715, type: 3}
   bulletShootPos: {fileID: 5197149711198856494}
@@ -122,6 +141,8 @@ MonoBehaviour:
   cooldown: 1
   lastShotTime: 0
   animator: {fileID: 5879265999713026971}
+  manager: {fileID: 0}
+  shieldActive: 0
 --- !u!54 &666954932474616194
 Rigidbody:
   m_ObjectHideFlags: 0

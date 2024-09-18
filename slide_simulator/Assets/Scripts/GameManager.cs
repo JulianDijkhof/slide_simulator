@@ -63,10 +63,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         currentEnemySpeed = startEnemySpeed;
         InvokeRepeating("AddTimeToScore", 0, 1);
-        InvokeRepeating("SpawnNukePU", 180, 120);
-        InvokeRepeating("SpawnFreezePU", 120, 60);
-        InvokeRepeating("SpawnShieldPU", 180, 150);
-        InvokeRepeating("SpawnDoublePointsPU", 60, 135);
         freezeImage.enabled = false;
         shieldImage.enabled = false;
         doublePointsImage.enabled = false;
@@ -178,6 +174,10 @@ public class GameManager : MonoBehaviour
                 // Instantiate the enemy at the spawn location
                 Instantiate(enemyToSpawn, spawnLocation.transform.position, Quaternion.identity);
             }
+            else
+            {
+                Debug.LogError("No valid enemies or spawnlocations found!");
+            }
         }
     }
 
@@ -228,33 +228,33 @@ public class GameManager : MonoBehaviour
         freezeImage.enabled = false;
     }
 
-    private void SpawnNukePU()
+    public void SpawnNukePU()
     {
         Vector3 spawnLocation = new Vector3(
             UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
-            1.5f,                               // Y coordinate fixed at 1.5
+            3f,                               // Y coordinate fixed at 3
             UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
         );
 
         Instantiate(nukePU, spawnLocation, Quaternion.identity);
     }
 
-    private void SpawnFreezePU()
+    public void SpawnFreezePU()
     {
         Vector3 spawnLocation = new Vector3(
             UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
-            1.5f,                               // Y coordinate fixed at 1.5
+            1.1f,                               // Y coordinate fixed at 3
             UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
         );
 
         Instantiate(freezePU, spawnLocation, Quaternion.identity);
     }
 
-    private void SpawnShieldPU()
+    public void SpawnShieldPU()
     {
         Vector3 spawnLocation = new Vector3(
             UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
-            1.5f,                               // Y coordinate fixed at 1.5
+            3f,                               // Y coordinate fixed at 3
             UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
         );
 
@@ -275,11 +275,11 @@ public class GameManager : MonoBehaviour
         shieldImage.enabled = false;
     }
 
-    private void SpawnDoublePointsPU()
+    public void SpawnDoublePointsPU()
     {
         Vector3 spawnLocation = new Vector3(
     UnityEngine.Random.Range(9f, 95f),   // X coordinate between 9 and 95
-    1.5f,                               // Y coordinate fixed at 1.5
+    3f,                               // Y coordinate fixed at 3
     UnityEngine.Random.Range(35f, 75f)  // Z coordinate between 35 and 75
 );
 

@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6b7540271ca3349b40f5f282666251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expirationTime: 5
+  expirationTime: 20
   duration: 10
 --- !u!54 &2132288372721720582
 Rigidbody:
@@ -127,7 +127,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

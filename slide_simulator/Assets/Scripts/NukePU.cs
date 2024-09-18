@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class NukePU : MonoBehaviour
 {
-    public float expirationTime = 5f;
+    public float expirationTime = 15f;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(DestroyAfterTime());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter(Collider collider)
